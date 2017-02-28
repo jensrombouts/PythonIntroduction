@@ -1,19 +1,15 @@
 from urllib import request
-
-url = 'http://www.standaard.be/cnt/dmf20170228_02754875'
-
-page = request.urlopen(url)
-
 from bs4 import BeautifulSoup
 
-soup = BeautifulSoup(page,'lxml')
+urls = ['http://www.standaard.be/cnt/dmf20170228_02754875','http://www.standaard.be/cnt/dmf20170228_02754871']
 
-string_temp = soup.find_all('p')
-
-string = ""
-
-for element in string_temp:
-    string = string + str(element)
+for url in urls:
+    page = request.urlopen(url)
+    soup = BeautifulSoup(page,'lxml')
+    string_temp = soup.find_all('p')
+    string = ""
+    for element in string_temp:
+        string = string + str(element)
 
 string = string.replace('</p>','')
 string = string.replace('<p>','')
